@@ -1,0 +1,16 @@
+{
+  "configurations": [
+    {
+      "name": "Run App",
+      "type": "dart",
+      "request": "launch",
+      "program": "app/lib/main.dart"
+    },
+    {
+      "name": "Run Server",
+      "type": "dart",
+      "request": "launch",
+      "program": "server/bin/server.dart"
+    }
+  ]
+}

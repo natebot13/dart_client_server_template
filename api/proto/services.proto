@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+service IncrementService {
+  rpc Increment(IncrementRequest) returns (IncrementResponse);
+}
+
+message IncrementRequest {}
+message IncrementResponse { int32 value = 1; }

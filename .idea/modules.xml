@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api\melos_api.iml" filepath="$PROJECT_DIR$/api\melos_api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app\melos_app.iml" filepath="$PROJECT_DIR$/app\melos_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server\melos_server.iml" filepath="$PROJECT_DIR$/server\melos_server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/melos_fwish.iml" filepath="$PROJECT_DIR$/melos_fwish.iml" />
+    </modules>
+  </component>
+</project>

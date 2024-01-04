@@ -1,0 +1,20 @@
+name: fwish
+
+packages:
+  - api
+  - server
+  - app
+
+scripts:
+  buildRunner:
+    exec: dart run build_runner build
+    packageFilters:
+      dependsOn: build_runner
+  
+  protofu:
+    exec: protofu
+    packageFilters:
+      fileExists: protofu.yaml
+  
+  build:
+    run: melos run protofu & melos run buildRunner

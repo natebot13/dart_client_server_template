@@ -1,0 +1,6 @@
+sources:
+ - "proto/"
+compiler:
+  grpcEnabled: true
+options:
+  experimentalAllowProto3Optional: true

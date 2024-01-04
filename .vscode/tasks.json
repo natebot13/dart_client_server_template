@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "command": "melos build",
+      "label": "Build",
+      "type": "shell",
+      "group": "build"
+    }
+  ]
+}
