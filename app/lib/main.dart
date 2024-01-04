@@ -1,8 +1,9 @@
-import 'package:api/api.dart';
+import 'package:app/bloc/auth_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import 'src/injection.dart';
@@ -10,7 +11,6 @@ import 'firebase_options.dart';
 
 void main() async {
   configureInjection(kDebugMode ? Environment.dev : Environment.prod);
-  runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -18,7 +18,7 @@ void main() async {
   if (kDebugMode) {
     await FirebaseAuth.instance.useAuthEmulator("192.168.86.195", 9099);
   }
-  // FirebaseAuth.instance.signInAnonymously();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -28,86 +28,100 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'fWish',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: BlocProvider(
+        create: (context) => AuthBloc(),
+        child: const AuthFlow(),
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  bool _loading = false;
-  late final IncrementServiceClient client;
-
-  @override
-  void initState() {
-    client = getIt<IncrementServiceClient>();
-    super.initState();
-  }
-
-  Future<void> _incrementCounter() async {
-    setState(() => _loading = true);
-    final response = await client.increment(IncrementRequest());
-    setState(() {
-      _counter = response.value;
-      _loading = false;
-    });
-  }
+class AuthFlow extends StatelessWidget {
+  const AuthFlow({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: BlocConsumer<AuthBloc, AuthState>(
+        builder: (context, state) {
+          if (state is AuthLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          if (state is AuthSuccess) {
+            return const Center(child: Text("Welcome in"));
+          }
+
+          return const Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Hello, please sign in"),
+                EmailAndPassword(),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _loading ? null : _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+          );
+        },
+        listener: (context, state) {
+          if (state is AuthFailure) {
+            final snack = SnackBar(content: Text(state.errorMessage));
+            ScaffoldMessenger.of(context).showSnackBar(snack);
+          }
+        },
       ),
     );
+  }
+}
+
+class EmailAndPassword extends StatefulWidget {
+  const EmailAndPassword({super.key});
+
+  @override
+  State<EmailAndPassword> createState() => _EmailAndPasswordState();
+}
+
+class _EmailAndPasswordState extends State<EmailAndPassword> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(64.0),
+      child: Column(
+        children: [
+          const Text("Email address"),
+          TextFormField(
+            controller: emailController,
+          ),
+          const Text("Password"),
+          TextFormField(
+            obscureText: true,
+            controller: passwordController,
+            onFieldSubmitted: (value) => _signUp(context),
+          )
+        ],
+      ),
+    );
+  }
+
+  void _signUp(BuildContext context) {
+    BlocProvider.of<AuthBloc>(context).add(SignUpEvent(
+        emailController.text.trim(), passwordController.text.trim()));
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }
