@@ -1,5 +1,6 @@
 import 'package:api/api.dart';
 import 'package:grpc/grpc.dart';
+import 'package:grpc/grpc_or_grpcweb.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class ServerConfig {
@@ -12,7 +13,7 @@ abstract class ServerConfig {
 @dev
 class DevServerConfig extends ServerConfig {
   @override
-  String get address => '192.168.86.195';
+  String get address => 'localhost';
 
   @override
   ChannelCredentials get credentials => const ChannelCredentials.insecure();
@@ -55,11 +56,18 @@ abstract class ClientProviders {
   }
 
   @singleton
-  ClientChannel channel(ServerConfig config, ChannelOptions options) {
-    return ClientChannel(config.address, port: config.port, options: options);
+  GrpcOrGrpcWebClientChannel channel(
+      ServerConfig config, ChannelOptions options) {
+    return GrpcOrGrpcWebClientChannel.toSeparatePorts(
+      host: config.address,
+      grpcPort: 45654,
+      grpcWebPort: 9090,
+      grpcTransportSecure: options.credentials.isSecure,
+      grpcWebTransportSecure: options.credentials.isSecure,
+    );
   }
 
   @singleton
-  IncrementServiceClient incrementClient(ClientChannel channel) =>
+  IncrementServiceClient incrementClient(GrpcOrGrpcWebClientChannel channel) =>
       IncrementServiceClient(channel);
 }

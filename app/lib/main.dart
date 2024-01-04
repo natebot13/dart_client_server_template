@@ -18,7 +18,7 @@ void main() async {
   if (kDebugMode) {
     await FirebaseAuth.instance.useAuthEmulator("192.168.86.195", 9099);
   }
-  FirebaseAuth.instance.signInAnonymously();
+  // FirebaseAuth.instance.signInAnonymously();
 }
 
 class MyApp extends StatelessWidget {
