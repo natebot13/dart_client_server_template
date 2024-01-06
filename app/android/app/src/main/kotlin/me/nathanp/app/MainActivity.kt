@@ -1,4 +1,4 @@
-package me.nathanp.app
+package me.nathanp.wishr
 
 import io.flutter.embedding.android.FlutterActivity
 

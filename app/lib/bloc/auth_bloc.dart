@@ -1,7 +1,4 @@
-import 'dart:js_interop';
-
-import 'package:app/authentication.dart';
-import 'package:app/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -9,33 +6,25 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthService authService = AuthService();
+  final FirebaseAuth authService;
 
-  AuthBloc() : super(const AuthInitial()) {
-    on<SignUpEvent>((event, emit) async {
-      emit(const AuthLoading());
-      try {
-        final User? user =
-            await authService.signUpUser(event.email, event.password);
-        if (user == null) {
-          emit(const AuthFailure(errorMessage: "Something went wrong"));
-          emit(const AuthInitial());
-        } else {
-          emit(AuthSuccess(user: user));
-        }
-      } catch (e) {
-        print(e.toString());
-      }
+  AuthBloc(this.authService) : super(const AuthLoggedOut()) {
+    on<InitAuthEvent>((event, emit) async {
+      await emit.forEach(
+        authService.authStateChanges(),
+        onData: (maybeUser) {
+          if (maybeUser != null && maybeUser.emailVerified) {
+            return AuthLoggedIn(user: maybeUser);
+          }
+          return const AuthLoggedOut();
+        },
+      );
     });
 
-    on<SignOutEvent>((event, emit) async {
-      emit(const AuthLoading());
-      try {
-        await authService.signOutUser();
-        emit(const AuthInitial());
-      } catch (e) {
-        print(e.toString());
-      }
+    on<LogOutEvent>((event, emit) async {
+      await authService.signOut();
     });
+
+    add(const InitAuthEvent());
   }
 }

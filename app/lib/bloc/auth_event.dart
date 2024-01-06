@@ -5,11 +5,8 @@ sealed class AuthEvent {
   const AuthEvent();
 }
 
-class SignUpEvent extends AuthEvent {
-  final String email;
-  final String password;
-
-  const SignUpEvent(this.email, this.password);
+final class InitAuthEvent extends AuthEvent {
+  const InitAuthEvent();
 }
 
-class SignOutEvent extends AuthEvent {}
+final class LogOutEvent extends AuthEvent {}
