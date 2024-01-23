@@ -1,4 +1,4 @@
-name: fwish
+name: flutter_client_server
 
 environment:
   sdk: '>=2.18.0 <3.0.0'

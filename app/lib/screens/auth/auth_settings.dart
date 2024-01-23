@@ -11,9 +11,9 @@ final mfaAction = AuthStateChangeAction<MFARequired>(
 );
 
 final actionCodeSettings = ActionCodeSettings(
-  url: 'https://fwish-e4ba9.firebaseapp.com',
+  url: '<some_firebase_auth_project>',
   handleCodeInApp: true,
   androidMinimumVersion: '1',
-  androidPackageName: 'me.nathanp.wishr',
-  iOSBundleId: 'me.nathanp.wishr',
+  androidPackageName: '<some_package_name>',
+  iOSBundleId: '<some_package_name>',
 );

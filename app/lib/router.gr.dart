@@ -9,9 +9,9 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i3;
+import 'package:client_template/screens/auth/login_page.dart' as _i1;
+import 'package:client_template/screens/home/home.dart' as _i2;
 import 'package:flutter/material.dart' as _i4;
-import 'package:wishr/screens/auth/login_page.dart' as _i1;
-import 'package:wishr/screens/home/home.dart' as _i2;
 
 abstract class $AppRouter extends _i3.RootStackRouter {
   $AppRouter({super.navigatorKey});

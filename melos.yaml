@@ -1,4 +1,4 @@
-name: fwish
+name: flutter_client_server
 
 packages:
   - api

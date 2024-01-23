@@ -12,10 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:injectable/injectable.dart';
-import 'package:wishr/bloc/auth_bloc.dart';
-import 'package:wishr/router.dart';
-import 'package:wishr/router.gr.dart';
 
+import 'bloc/auth_bloc.dart';
+import 'router.dart';
+import 'router.gr.dart';
 import 'src/injection.dart';
 import 'firebase_options.dart';
 
@@ -46,7 +46,7 @@ Future<void> main() async {
     EmailAuthProvider(),
   ]);
 
-  runApp(Wishr());
+  runApp(ClientTemplate());
 }
 
 // Overrides a label for en locale
@@ -59,8 +59,8 @@ class LabelOverrides extends DefaultLocalizations {
   String get emailInputLabel => 'Enter your email';
 }
 
-class Wishr extends StatelessWidget {
-  Wishr({super.key});
+class ClientTemplate extends StatelessWidget {
+  ClientTemplate({super.key});
 
   final _appRouter = AppRouter();
 
@@ -104,7 +104,7 @@ class Wishr extends StatelessWidget {
                     const LoginRoute()
                 ],
               ),
-              title: 'wishr',
+              title: 'Client Template',
               debugShowCheckedModeBanner: false,
               locale: const Locale('en'),
               localizationsDelegates: [

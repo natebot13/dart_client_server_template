@@ -26,7 +26,7 @@ class DevServerConfig extends ServerConfig {
 @prod
 class RelServerConfig extends ServerConfig {
   @override
-  String get address => 'fwish.nathanp.me';
+  String get address => '<some-url-here>';
 
   @override
   ChannelCredentials get credentials => const ChannelCredentials.secure();

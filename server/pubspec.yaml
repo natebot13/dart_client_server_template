@@ -1,5 +1,5 @@
 name: server
-description: A sample command-line application.
+description: Server template for dart based client server architecture
 version: 1.0.0
 publish_to: 'none'
 # repository: https://github.com/my_org/my_repo

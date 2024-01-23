@@ -1,5 +1,5 @@
-name: wishr
-description: wishr app
+name: client_template
+description: client flutter application
 publish_to: 'none'
 
 version: 1.0.0+1
