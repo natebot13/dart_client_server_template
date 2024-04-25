@@ -8,9 +8,10 @@
     },
     {
       "name": "Run Server",
+      "preLaunchTask": "Start Envoy",
       "type": "dart",
       "request": "launch",
-      "program": "server/bin/server.dart"
+      "program": "server/bin/server.dart",
     }
   ]
 }

@@ -2,10 +2,17 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "command": "melos build",
       "label": "Build",
+      "command": "melos build",
       "type": "shell",
       "group": "build"
+    },
+    {
+      "label": "Start Envoy",
+      "command": "docker",
+      "args": ["compose", "up", "-d", "envoy"],
+      "type": "shell",
+      "group": "none"
     }
   ]
 }

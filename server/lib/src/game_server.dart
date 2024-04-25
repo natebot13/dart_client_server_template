@@ -1,5 +1,6 @@
 import 'package:api/api.dart';
 import 'package:grpc/grpc.dart';
+import 'package:logging/logging.dart';
 
 class IncrementService extends IncrementServiceBase {
   int _counter = 0;
@@ -14,6 +15,7 @@ class IncrementService extends IncrementServiceBase {
 }
 
 class GameServer {
+  static final Logger logger = Logger("GameServer");
   final Server _server;
   GameServer._(this._server);
 
@@ -22,6 +24,7 @@ class GameServer {
       IncrementService(),
     ]);
     await server.serve(port: port);
+    logger.info("Server started on port: $port");
     return GameServer._(server);
   }
 

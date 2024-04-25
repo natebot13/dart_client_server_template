@@ -10,6 +10,14 @@ services:
       - '9901:9901'
     networks:
       - server-net
+  server:
+    build:
+      context: .
+      dockerfile: server.Dockerfile
+    ports:
+      - '45654:45654'
+    networks:
+      - server-net
 
 networks:
   server-net:
