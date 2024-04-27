@@ -1,4 +1,7 @@
+import 'package:api/api.dart';
 import 'package:auto_route/annotations.dart';
+import 'package:client_template/cubit/counter_cubit.dart';
+import 'package:client_template/src/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/auth_bloc.dart';
@@ -14,18 +17,37 @@ class HomeScreen extends StatelessWidget {
       title: 'client',
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text("Welcome in"),
-              FilledButton(
-                  onPressed: () =>
-                      BlocProvider.of<AuthBloc>(context).add(LogOutEvent()),
-                  child: const Text('Log out'))
-            ],
+      home: BlocProvider(
+        create: (context) => CounterCubit(
+          getIt.get<AuthenticatedServiceClient>(),
+        ),
+        child: Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text("Welcome in"),
+                FilledButton(
+                    onPressed: () =>
+                        BlocProvider.of<AuthBloc>(context).add(LogOutEvent()),
+                    child: const Text('Log out'))
+              ],
+            ),
           ),
+          floatingActionButton: Builder(builder: (context) {
+            return FloatingActionButton(
+              onPressed: () =>
+                  BlocProvider.of<CounterCubit>(context).increment(),
+              child: BlocBuilder<CounterCubit, CounterState>(
+                builder: (context, state) {
+                  if (state is CounterValue) {
+                    return Text('${state.value}');
+                  }
+                  return const Text('?');
+                },
+              ),
+            );
+          }),
         ),
       ),
     );

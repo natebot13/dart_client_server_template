@@ -1,5 +1,7 @@
+import 'package:injectable/injectable.dart';
 import 'package:logging/logging.dart';
 import 'package:server/server.dart' as server;
+import 'package:server/injection.dart';
 
 void main(List<String> arguments) async {
   // Globally set up logging
@@ -7,5 +9,12 @@ void main(List<String> arguments) async {
   Logger.root.onRecord.listen((record) {
     print('${record.level.name}: ${record.time}: ${record.message}');
   });
+
+  // Configure injections from current environment
+  configureInjection(
+    String.fromEnvironment('environment', defaultValue: Environment.dev),
+  );
+
+  // Start the server
   await server.GameServer.start();
 }

@@ -11,7 +11,7 @@ void main() {
       credentials: ChannelCredentials.insecure(),
     ),
   );
-  final IncrementServiceClient client = IncrementServiceClient(channel);
+  final AuthenticatedServiceClient client = AuthenticatedServiceClient(channel);
 
   setUpAll(GameServer.start);
 

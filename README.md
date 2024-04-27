@@ -28,3 +28,11 @@ Client side testing
 Server side testing
 Shared protobuf definitions
 Dependency Injection
+
+# Troubleshooting
+If you're getting something like:
+```
+Error: gRPC Error (code: 2, codeName: UNKNOWN, message: HTTP request completed without a status (potential CORS issue), details: null, rawResponse: , trailers: {})
+```
+Ensure that the envoy docker container is running on the right port, and that port is exposed and forwarded to the host system.
+Also, ensure that any additional headers you add to requests are included in envoys allowed list of headers for the cors policy.

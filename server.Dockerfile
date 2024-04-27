@@ -13,7 +13,7 @@ COPY server/pubspec.* .
 COPY server/lib lib
 COPY server/bin bin
 RUN dart pub get
-RUN dart compile exe bin/server.dart -o bin/server
+RUN dart compile exe bin/server.dart -o bin/server -Denvironment=prod
 
 FROM scratch
 COPY --from=build /runtime/ /

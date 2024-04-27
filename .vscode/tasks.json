@@ -10,7 +10,7 @@
     {
       "label": "Start Envoy",
       "command": "docker",
-      "args": ["compose", "up", "-d", "envoy"],
+      "args": ["compose", "up", "-d", "--build", "envoy"],
       "type": "shell",
       "group": "none"
     }

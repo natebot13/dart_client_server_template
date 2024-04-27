@@ -1,1 +1,4 @@
 generated/
+
+# Libraries shouldn't include this file
+pubspec.lock

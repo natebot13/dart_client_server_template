@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:client/main.dart';
+import 'package:client_template/main.dart';
 
 import 'test_injections.dart';
 

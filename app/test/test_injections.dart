@@ -29,8 +29,8 @@ class MockResponseFuture<T> extends Mock implements ResponseFuture<T> {
   }
 }
 
-@Injectable(as: IncrementServiceClient)
-class MockIncrementClient extends Mock implements IncrementServiceClient {
+@Injectable(as: AuthenticatedServiceClient)
+class MockIncrementClient extends Mock implements AuthenticatedServiceClient {
   @override
   ResponseFuture<IncrementResponse> increment(IncrementRequest request,
       {CallOptions? options}) {

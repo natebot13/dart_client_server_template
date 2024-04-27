@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+// Could be used to annotate methods that are public/open
+// Probably better for now to just have different services with
+// different combinations of interceptors.
+extend google.protobuf.MethodOptions { bool open = 50001; }

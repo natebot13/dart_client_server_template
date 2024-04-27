@@ -40,6 +40,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.5.0"
+  asn1lib:
+    dependency: transitive
+    description:
+      name: asn1lib
+      sha256: c9c85fedbe2188b95133cbe960e16f5f448860f7133330e272edbbca5893ddc6
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.2"
   async:
     dependency: transitive
     description:
@@ -176,6 +184,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
+  crypto_keys:
+    dependency: transitive
+    description:
+      name: crypto_keys
+      sha256: acc19abf34623d990a0e8aec69463d74a824c31f137128f42e2810befc509ad0
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0+1"
+  crypto_keys_plus:
+    dependency: transitive
+    description:
+      name: crypto_keys_plus
+      sha256: fbebe8a45c68cd3c8b1ad3145172cfa276a30d9bbe9a4bf4cc03efc32b9b7a00
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
   dart_style:
     dependency: transitive
     description:
@@ -192,6 +216,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
+  firebase_auth_token:
+    dependency: "direct main"
+    description:
+      name: firebase_auth_token
+      sha256: bb879844ab8c24fb57b50e6f26d407226d75eeccc84150892d857f7144807f84
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.6"
   fixnum:
     dependency: transitive
     description:
@@ -257,7 +289,7 @@ packages:
     source: hosted
     version: "3.2.4"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       sha256: "761a297c042deedc1ffbb156d6e2af13886bb305c2a343a4d972504cd67dd938"
@@ -312,6 +344,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  jose:
+    dependency: transitive
+    description:
+      name: jose
+      sha256: "7955ec5d131960104e81fbf151abacb9d835c16c9e793ed394b2809f28b2198d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.4"
+  jose_plus:
+    dependency: "direct main"
+    description:
+      name: jose_plus
+      sha256: "9b8af3a752ddd4257f66caa8f7b4d121a7d8b64755007bb2bcd033f599c4637c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.6"
   js:
     dependency: transitive
     description:
@@ -432,6 +480,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.3"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      sha256: b1c1ac5ce6688d77f65f3375a9abb9319b3cb32486bdc7a1e0fdf004d7ba4e47
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.1"
   recase:
     dependency: transitive
     description:
@@ -536,6 +592,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  synchronized:
+    dependency: "direct main"
+    description:
+      name: synchronized
+      sha256: "539ef412b170d65ecdafd780f924e5be3f60032a1128df156adad6c5b373d558"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0+1"
   term_glyph:
     dependency: transitive
     description:
@@ -624,6 +688,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
+  x509:
+    dependency: transitive
+    description:
+      name: x509
+      sha256: "3262dc9a7d45b0876f886c01bfc7d5e765704f7dfd31f8cf5224fc875c17a6c6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.4+2"
+  x509_plus:
+    dependency: transitive
+    description:
+      name: x509_plus
+      sha256: "8b91d07aead69d2644f53cbd1fa1df4413e0874f2622d9a612eb44a43bc80639"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.2"
   yaml:
     dependency: transitive
     description:
