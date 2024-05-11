@@ -1,7 +1,11 @@
 syntax = "proto3";
 
+import "custom_options.proto";
+
 service AuthenticatedService {
-  rpc Increment(IncrementRequest) returns (IncrementResponse);
+  rpc Increment(IncrementRequest) returns (IncrementResponse) {
+    option (open) = true;
+  };
 }
 
 service UnauthenticatedService {}

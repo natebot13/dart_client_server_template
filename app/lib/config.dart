@@ -1,8 +1,10 @@
 import 'package:api/api.dart';
+import 'package:client_template/interceptors.dart';
 import 'package:grpc/grpc_or_grpcweb.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class ServerConfig {
+  String get authHeader => "auth";
   String get address;
   int get port;
 }
@@ -45,7 +47,7 @@ abstract class ClientProviders {
       host: config.address,
       grpcPort: 45654,
       grpcWebPort: 9090,
-      grpcTransportSecure: true,
+      grpcTransportSecure: false,
       grpcWebTransportSecure: true,
     );
   }
@@ -54,7 +56,10 @@ abstract class ClientProviders {
   AuthenticatedServiceClient authenticatedClient(
     GrpcOrGrpcWebClientChannel channel,
   ) {
-    return AuthenticatedServiceClient(channel);
+    return AuthenticatedServiceClient(
+      channel,
+      interceptors: [AuthInterceptor()],
+    );
   }
 
   @singleton

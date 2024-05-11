@@ -1,4 +1,3 @@
-import 'package:api/api.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:client_template/cubit/counter_cubit.dart';
 import 'package:client_template/src/injection.dart';
@@ -18,9 +17,7 @@ class HomeScreen extends StatelessWidget {
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       home: BlocProvider(
-        create: (context) => CounterCubit(
-          getIt.get<AuthenticatedServiceClient>(),
-        ),
+        create: (context) => getIt.get<CounterCubit>(),
         child: Scaffold(
           body: Center(
             child: Column(

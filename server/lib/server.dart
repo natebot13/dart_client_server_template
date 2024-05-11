@@ -1,1 +1,1 @@
-export 'src/game_server.dart';
+export 'src/server.dart';

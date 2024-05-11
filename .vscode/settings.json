@@ -2,5 +2,10 @@
   "cSpell.words": [
     "dosis",
     "grpcweb",
-  ]
+  ],
+  "protoc": {
+    "options": [
+      "--proto_path=proto"
+    ]
+  },
 }

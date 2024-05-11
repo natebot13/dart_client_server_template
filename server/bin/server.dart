@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:logging/logging.dart';
-import 'package:server/server.dart' as server;
+import 'package:server/server.dart';
 import 'package:server/injection.dart';
 
 void main(List<String> arguments) async {
@@ -16,5 +16,5 @@ void main(List<String> arguments) async {
   );
 
   // Start the server
-  await server.GameServer.start();
+  await ApiServer.start();
 }

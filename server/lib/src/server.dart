@@ -34,10 +34,10 @@ class AuthenticatedService extends AuthenticatedServiceBase {
 
 class UnauthenticatedService extends UnauthenticatedServiceBase {}
 
-class GameServer {
-  static final Logger logger = Logger("GameServer");
+class ApiServer {
+  static final Logger logger = Logger("ApiServer");
   final Server _server;
-  GameServer._(this._server);
+  ApiServer._(this._server);
 
   static final publicKeyService = Service(Repository());
 
@@ -45,6 +45,8 @@ class GameServer {
     ServiceCall call,
     ServiceMethod method,
   ) async {
+    print(method.handler.runtimeType.toString());
+    print(call.remoteAddress?.address);
     final serverConfig = getIt.get<ServerConfig>();
     logger.info(method.name);
     final metadata = call.clientMetadata ?? {};
@@ -74,17 +76,21 @@ class GameServer {
     return null;
   }
 
-  static Future<GameServer> start() async {
+  static Future<ApiServer> start() async {
     final serverConfig = getIt.get<ServerConfig>();
-    final server = Server.create(services: [
-      AuthenticatedService(),
-      UnauthenticatedService(),
-    ], interceptors: [
-      _authenticationInterceptor
-    ]);
+    final server = Server.create(
+      services: [
+        AuthenticatedService(),
+        UnauthenticatedService(),
+      ],
+      interceptors: [_authenticationInterceptor],
+      errorHandler: (error, trace) {
+        logger.severe(error.message, error, trace);
+      },
+    );
     await server.serve(port: serverConfig.port);
     logger.info("Server started on port: ${serverConfig.port}");
-    return GameServer._(server);
+    return ApiServer._(server);
   }
 
   Future<void> stop() {

@@ -13,7 +13,7 @@ void main() {
   );
   final AuthenticatedServiceClient client = AuthenticatedServiceClient(channel);
 
-  setUpAll(GameServer.start);
+  setUpAll(ApiServer.start);
 
   test('increment', () async {
     expect(
